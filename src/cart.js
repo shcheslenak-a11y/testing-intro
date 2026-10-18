@@ -16,7 +16,15 @@ function addToCart(cart, item, quantity) {
   return cart;
 }
 
-function changeQuantity() { return notImplemented(); }
+function changeQuantity(cart, item_id, quantity) {
+  if (quantity == 0) throw new RangeError('quantity must be grater than 0');
+  let found = cart.filter(({id}) => id == item_id);
+  if (found.length) {
+    if (quantity > found[0].stock) throw new RangeError('Not enough items in stock')
+    found[0].quantity = quantity
+  }  
+  return cart;
+}
 function removeFromCart() { return notImplemented(); }
 function calculateCartSubtotal() { return notImplemented(); }
 function calculateOrderTotal() { return notImplemented(); }
